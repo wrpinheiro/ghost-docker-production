@@ -9,6 +9,6 @@ then
     -v /var/lib/ghost:/var/lib/ghost \
     -d ghost
 else
-  echo "Arquivo ghost.env não existe"
+  echo "File ghost.env not found"
   exit 1;
 fi
