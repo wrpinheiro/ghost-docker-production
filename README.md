@@ -1,37 +1,27 @@
-# Ghost production with Docker
+# Ghost in production
 
 ## Description
 
-This repository contains the startup files and script to run the [dockerized version of Ghost](https://hub.docker.com/_/ghost/). The settings here allow you to store the Ghost content files (apps, images, themes and db) in a volume in the host machine. The configuration file is ready to work with a Mailgun account.
+This repository contains the startup files and docker `things` to allow setup and run *Ghost* easily. The following tools and settings are used:
+
+* `Docker` and `docker-compose` to start up everything
+* Use the [official dockerized version of Ghost](https://hub.docker.com/_/ghost/). Doing this you can easily upgrade your Ghost versions by just changing the image version
+* Use `nginx` to proxy the requests. This is an option to avoid expose Ghost application to internet and you can also customize it as you need
+* Externalized Ghost settings, so you can take care of your data, backups, and so on
+* Ready to work with Mailgun. If you have a Mailgun account then you're done!
 
 ## How to run
 
-Make a copy of `ghost.example.env` with the name `ghost.env` by running the command:
+Copy `ghost.env.example` to `ghost.env` by running the command:
 
 ```
 cp ghost.example.env ghost.env
 ```
 
-Change the value of properties GHOST_URL, GHOST_MAIL_USER and GHOST_MAIL_PASSWORD in the `ghost.env` file.
-
-Copy the content of the `ghost` directory to `/var/lib/ghost` with:
+Change propertie's values in the `ghost.env` file and start the applications:
 
 ```
-cp -R ./ghost/ /var/lib/ghost
+docker-compose up -d
 ```
 
-Now run the `start.sh` script.
-
-```
-chmod +x ./start.sh
-./start
-```
-
-Check if the container is running with `docker ps` and also check the logs with `docker logs <container_id>`
-
-If everything is ok the application should be running on port 80.
-
-## Things to do
-
-* When container starts it creates another versions of `config.js` file
-* Start automatically the container after a reboot
+If everything is ok, point your browser to `http://<blog url>` and be happy :-)
