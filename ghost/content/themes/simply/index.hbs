@@ -1,0 +1,16 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+{{!-- All entry --}}
+<section class="homePage u-wrap">
+    <div class="feed-entry-content u-marginTop30 u-marginBottom15 u-maxWidth1000 u-marginAuto">
+        {{!--<header class="u-marginBottom30 u-fontSizeLarge u-fontWeightBold u-link u-contentTitle u-md-fontSizeBase">Most Recent Articles</header>--}}
+        <div class="feed-entry-wrap">
+            {{!-- This is the post loop - each post will be output using this markup --}}
+            <div class="row">{{#foreach posts}} {{>"entry"}} {{/foreach}} </div>
+        </div>
+    </div>
+
+    {{!-- Pagination --}}
+    {{^is "paged"}}<a href="#" class="loadMore link--accent" data-page-total="{{pagination.pages}}">Load more</a>{{else}}{{"pagination"}}{{/is}}
+</section>
