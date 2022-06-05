@@ -21,6 +21,12 @@
         groups: docker
         append: yes
 
+    - name: create ghost content dir
+      file:
+        path: /var/lib/ghost/content
+        state: directory
+        mode: 0755
+
     - name: create ghost network
       docker_network:
         name: "{{ docker_network_name }}"
@@ -29,6 +35,8 @@
       docker_container:
         name: ghost
         image: "ghost:1.19.2"
+        volumes:
+          /var/lib/ghost/content:/var/lib/ghost/content
         networks:
           - name: "{{ docker_network_name }}"
 
